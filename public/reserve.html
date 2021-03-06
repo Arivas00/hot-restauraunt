@@ -45,8 +45,8 @@
             <p></p>
             <p class="lead text-center">
 
-                <a class="btn btn-danger btn-lg" href="./tables.html" role="button">View Tables</a>
-                <a class="btn btn-primary btn-lg" href="./home.html" role="button">🏠</a>
+                <a class="btn btn-danger btn-lg" href="./tables" role="button">View Tables</a>
+                <a class="btn btn-primary btn-lg" href="./home" role="button">🏠</a>
             </p>
         </div>
 
@@ -104,11 +104,11 @@
   <script type="text/javascript">
       const addBtn = document.getElementById('add-btn');
 
-      // Question: What is "e" short for?
+
       addBtn.addEventListener('click', (e) => {
           e.preventDefault();
 
-          // Question: What does this code do?
+
           let reserveName = document.getElementById('reserve_name').value.trim();
           let reservePhone = document.getElementById('reserve_phone').value.trim();
           let reserveEmail = document.getElementById('reserve_email').value.trim();
@@ -121,7 +121,6 @@
               uniqueID: reserveUniqueID,
           };
 
-          // Question: What does this code do??
           fetch('/api/tables', {
                   method: 'POST',
                   headers: {
