@@ -45,7 +45,7 @@
             <p></p>
             <p class="lead text-center">
 
-                <a class="btn btn-danger btn-lg" href="#" role="button" id="add-reservation">Make Reservations</a>
+                <a class="btn btn-danger btn-lg" href="#" role="button" id="add-btn">Make Reservations</a>
                 <a class="btn btn-primary btn-lg" href="#" role="button">🏠</a>
             </p>
         </div>
@@ -60,25 +60,25 @@
                     </div>
                     <div class="panel-body">
 
-                        <form role="form">
+                        <form role="form" method="POST">
 
                             <div class="form-group">
-                                <label for="">Name</label>
+                                <label for="reserve_name">Name</label>
                                 <input type="text" class="form-control" id="reserve_name">
                             </div>
 
                             <div class="form-group">
-                                <label for="">Phone Number</label>
+                                <label for="reserve_phone">Phone Number</label>
                                 <input type="text" class="form-control" id="reserve_phone">
                             </div>
 
                             <div class="form-group">
-                                <label for="">Email</label>
+                                <label for="reserve_email">Email</label>
                                 <input type="text" class="form-control" id="reserve_email">
                             </div>
 
                             <div class="form-group">
-                                <label for="">Unique ID</label>
+                                <label for="reserve_uniqueID">Unique ID</label>
                                 <input type="text" class="form-control" id="reserve_uniqueID">
                             </div>
 
@@ -109,30 +109,29 @@
           e.preventDefault();
 
           // Question: What does this code do?
-          let charName = document.getElementById('name').value.trim();
-          let charRole = document.getElementById('role').value.trim();
-          let charAge = document.getElementById('age').value.trim();
-          let charFp = document.getElementById('force-points').value.trim();
+          let reserveName = document.getElementById('reserve_name').value.trim();
+          let reservePhone = document.getElementById('reserve_phone').value.trim();
+          let reserveEmail = document.getElementById('reserve_email').value.trim();
+          let reserveUniqueID = document.getElementById('reserve_uniqueID').value.trim();
 
-          let newCharacter = {
-              name: charName,
-              role: charRole,
-              age: parseInt(charAge),
-              forcePoints: parseInt(charFp),
+          let newReservation = {
+              name: reserveName,
+              phone: reservePhone,
+              email: reserveEmail,
+              uniqueID: reserveUniqueID,
           };
 
           // Question: What does this code do??
-          fetch('/api/characters', {
+          fetch('/api/tables', {
                   method: 'POST',
                   headers: {
                       'Content-Type': 'application/json',
                   },
-                  body: JSON.stringify(newCharacter),
+                  body: JSON.stringify(newReservation),
               })
               .then((response) => response.json())
               .then((data) => {
-                  console.log('add.html', data);
-                  alert(`Adding character: ${data.name}`);
+                  console.log('reserve.html', data);
               })
               .catch((error) => {
                   console.error('Error:', error);
