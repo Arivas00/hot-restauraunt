@@ -50,15 +50,28 @@
             </p>
         </div>
 
-        <div class="panel panel-default">
+        <div class="panel panel-default" >
             <div class="panel-heading">
                 <h5 class="panel-title p-3">
                     Current Reservations
                 </h5>
             </div>
-
+<!-- reservations -->
             <div class="panel-body px-5">
-                Panel content
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">ID #</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Phone</th>
+                            <th scope="col">Email</th>
+                        </tr>
+                    </thead>
+                    <tbody id=
+                    "reservePanel">
+                        
+                    </tbody>
+                </table>
             </div>
         </div>
 
@@ -68,10 +81,23 @@
                     Waiting List
                 </h5>
             </div>
+<!-- waitlistt -->
+             <div class="panel-body px-5">
+                 <table class="table">
+                     <thead>
+                         <tr>
+                             <th scope="col">ID #</th>
+                             <th scope="col">Name</th>
+                             <th scope="col">Phone</th>
+                             <th scope="col">Email</th>
+                         </tr>
+                     </thead>
+                     <tbody id="waitlistPanel">
 
-            <div class="panel-body px-5">
-                Panel content
-            </div>
+                     </tbody>
+                 </table>
+             </div>
+             </div>
         </div>
         Control Panel
         <br />
@@ -87,3 +113,84 @@
 </body>
 
 </html>
+
+<script>
+    fetch(`/api/tables/`, {
+    method: 'GET',
+    headers: {
+             'Content-Type': 'application/json',
+                },
+    })
+    .then((response) => response.json())
+    .then((data) => {
+    console.log(data);
+    const { name, phone, email, uniqueID } = data;
+
+        for(i=0; i<data.length; i++) {
+
+            if (i<=4) {
+
+            const resPanel = document.getElementById('reservePanel');
+            console.log("HEYYYYYEYEYOO")
+            console.log(data[i].name);
+            console.log(data[i].email);
+
+               let resAdd = `
+               <tr class="bg-info">
+               <th scope="row">Table # ${[i]}</th>
+               <td></td>
+               <td></td>
+               <td></td>
+                </tr>
+                <tr class="border-bottom border-black">
+               <th scope="row">${data[i].uniqueID}</th>
+               <td>${data[i].name}</td>
+               <td>${data[i].phone}</td>
+               <td>${data[i].email}</td>
+                </tr>
+               `;
+
+            
+            resPanel.innerHTML = resPanel.innerHTML + resAdd;
+        } else {
+            const waitPanel = document.getElementById('waitlistPanel');
+            console.log("HEYYYYYEYEYOO")
+            console.log(data[i].name);
+            console.log(data[i].email);
+
+
+          let waitAdd = ` 
+          <tr class="bg-warning">
+              <th scope="row">Table # ${[i]}</th>
+              <td></td>
+              <td></td>
+              <td></td>
+          </tr>
+          <tr class="border-bottom border-black">
+              <th scope="row">${data[i].uniqueID}</th>
+              <td>${data[i].name}</td>
+              <td>${data[i].phone}</td>
+              <td>${data[i].email}</td>
+          </tr>
+          `;
+            waitPanel.innerHTML = waitPanel.innerHTML + waitAdd;
+        }
+        }
+
+
+    // if (data) {
+    // // statsEl.setAttribute('style', 'display: inline');
+    // nameEl.textContent = name;
+    // phoneEl.textContent = phone;
+    // emailEl.textContent = email;
+    // uniqueIDEl.textContent = uniqueID;
+    // } else {
+    // nameEl.textContent =
+    // 'The force is not strong with this one. Your character was not found.';
+    // statsEl.setAttribute('style', 'display: none');
+    // }
+    })
+    .catch((error) => {
+    console.error(error);
+    });
+</script>

@@ -135,5 +135,11 @@
               .catch((error) => {
                   console.error('Error:', error);
               });
+        
+        // Clear the form
+        document.getElementById('reserve_name').value = '';
+        document.getElementById('reserve_phone').value = '';
+        document.getElementById('reserve_email').value = '';
+        document.getElementById('reserve_uniqueID').value = '';
       });
   </script>
