@@ -45,7 +45,7 @@
             <p></p>
             <p class="lead text-center">
 
-                <a class="btn btn-danger btn-lg" href="#" role="button">Make Reservations</a>
+                <a class="btn btn-danger btn-lg" href="#" role="button" id="add-reservation">Make Reservations</a>
                 <a class="btn btn-primary btn-lg" href="#" role="button">🏠</a>
             </p>
         </div>
@@ -100,3 +100,42 @@
 </body>
 
 </html>
+
+  <script type="text/javascript">
+      const addBtn = document.getElementById('add-btn');
+
+      // Question: What is "e" short for?
+      addBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+
+          // Question: What does this code do?
+          let charName = document.getElementById('name').value.trim();
+          let charRole = document.getElementById('role').value.trim();
+          let charAge = document.getElementById('age').value.trim();
+          let charFp = document.getElementById('force-points').value.trim();
+
+          let newCharacter = {
+              name: charName,
+              role: charRole,
+              age: parseInt(charAge),
+              forcePoints: parseInt(charFp),
+          };
+
+          // Question: What does this code do??
+          fetch('/api/characters', {
+                  method: 'POST',
+                  headers: {
+                      'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify(newCharacter),
+              })
+              .then((response) => response.json())
+              .then((data) => {
+                  console.log('add.html', data);
+                  alert(`Adding character: ${data.name}`);
+              })
+              .catch((error) => {
+                  console.error('Error:', error);
+              });
+      });
+  </script>
